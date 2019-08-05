@@ -141,13 +141,63 @@ class CustomCell:UITableViewCell {
         txt.layer.borderColor = UIColor.gray.cgColor
         txt.layer.borderWidth = 2
         txt.isUserInteractionEnabled = true
+        
+        txt.autocapitalizationType = .none
+        
         return txt
     }()
     
     @objc func updateTxtField(_ sender:UITextField){
        print("text field changed")
+        let pattern = "(?=.*[A-Z])"     //"^[a-z]*[1-2]$" // 0 or more letters, followed by 1 or 2
+        var regex:NSRegularExpression?
+        do{
+        regex = try NSRegularExpression(pattern: pattern)
+    
+        }catch{
+        print("oops")
+        }
+        let valid = validate(string: sender.text!, withRegex: regex!)
+        print(valid)
+       let complex = checkTextSufficientComplexity(text: sender.text!)
+       print("complex enough? \(complex)\r\r")
     }
     
+    func checkTextSufficientComplexity(text : String) -> Bool{
+        
+        
+        let capitalLetterRegEx  = ".*[A-Z]+.*"  //whatever before and after at least one capitol letter
+        let texttest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
+        let capitalresult = texttest.evaluate(with: text)
+        //print("\(capitalresult)")
+        
+        
+        let numberRegEx  = ".*[0-9].*[0-9]"//".*[0-9]{2,}.*" //two numbers in a row
+        let texttest1 = NSPredicate(format:"self MATCHES %@", numberRegEx)
+        let numberresult = texttest1.evaluate(with: text)
+        //print("\(numberresult)")
+        
+        
+        _  = ".*[.*&^%$#@()/]+.*"
+        let texttest2 = NSPredicate(format:"self MATCHES %@", numberRegEx)
+        
+        let specialresult = texttest2.evaluate(with: text)
+        //print("\(specialresult)")
+        
+        return capitalresult && numberresult && specialresult
+        
+    }
+    //////////////////////////////////////////////////////////
+    func validate(string:String, withRegex: NSRegularExpression)->Bool{
+        let range = NSRange(string.startIndex..., in: string)
+        let matchRange = withRegex.rangeOfFirstMatch(
+            in: string,
+            options: .reportProgress,
+            range: range
+        )
+        return matchRange.location != NSNotFound
+    }
+    //////////////////////////////////////////////////////
     override func prepareForReuse() {
         //this happens before the viewcontroller sees current device orientation so it is opposite to common sense
         //if isLandscape == true {
