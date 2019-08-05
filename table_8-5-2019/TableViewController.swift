@@ -11,17 +11,49 @@ import UIKit
 class TableViewController: UITableViewController, shoutDelegate{
     
     func shout(_ name:String, _ row:Int){
+        
+        if row == 0{
+            
+                // 1
+                let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+                
+                // 2
+            let deleteAction = UIAlertAction(title: "Delete", style: .default,handler:{(UIAlertAction) in print("you chose to Delete")})
+            let saveAction = UIAlertAction(title: "Save", style: .default)
+                
+                // 3
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:{(UIAlertAction) in print("You chose Cancel")})
+          
+            cancelAction.accessibilityLabel = "Cancel top row selection"
+                
+                // 4
+                optionMenu.addAction(deleteAction)
+                optionMenu.addAction(saveAction)
+                optionMenu.addAction(cancelAction)
+                
+                // 5
+                self.present(optionMenu, animated: true, completion: nil)
+            return
+            }
+        
         //print("hit \(name) at row: \(row) whose age is: \(tableData.people[row].age)")
         let alert = UIAlertController(title: "CustomCell btnPressed", message:"hit \(name) at row: \(row) whose age is: \(tableData.people[row].age)", preferredStyle: UIAlertController.Style.alert)
         let noAction = UIAlertAction(title: "Do Something", style: .default, handler:
         {(UIAlertAction) in
-            print("Alert was dismissed")
+            print("Alert was dismissed with option 1")
+        })
+        let no2Action = UIAlertAction(title: "Do Something Else", style: .default, handler:
+        {(UIAlertAction) in
+            print("Alert was dismissed with option 2")
         })
         alert.addAction(noAction)
-        present(alert,animated: true, completion: nil)
+        alert.addAction(no2Action)
+        present(alert,animated: true, completion: alertComplete)
         //UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
     }
-
+    func alertComplete(){
+        print("Alert currently displayed.")
+    }
     var isLandscape:Bool?
     let CELL_ID = "CELL_ID"
     var tableData:viewData = viewData()
