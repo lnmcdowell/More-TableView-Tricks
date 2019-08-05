@@ -173,13 +173,13 @@ class CustomCell:UITableViewCell {
         
         
         let numberRegEx  = ".*[0-9].*[0-9]"//".*[0-9]{2,}.*" //two numbers in a row
-        let texttest1 = NSPredicate(format:"self MATCHES %@", numberRegEx)
+        let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: text)
         //print("\(numberresult)")
         
         
-        _  = ".*[.*&^%$#@()/]+.*"
-        let texttest2 = NSPredicate(format:"self MATCHES %@", numberRegEx)
+        let specialCharacterRegX  = "[.*&^%$#@()/]+"
+        let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegX)
         
         let specialresult = texttest2.evaluate(with: text)
         //print("\(specialresult)")
