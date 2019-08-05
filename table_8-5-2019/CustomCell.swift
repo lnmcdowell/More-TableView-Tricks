@@ -31,6 +31,9 @@ class CustomCell:UITableViewCell {
         addSubview(nameageContainer)
         nameageContainer.addSubview(nameDisplay)
         nameageContainer.addSubview(ageDisplay)
+        
+        contentView.addSubview(txtInput)
+        
         nameageContainer.doConstraints(top: contentView.topAnchor, left: contentView.leadingAnchor, bottom: contentView.bottomAnchor, right: nil,
                                        padTop: 20, padLeft: 80, padBottom: -20, padRight: 0, width: 120, height: 0)
         nameDisplay.doConstraints(top: nameageContainer.topAnchor, left: nameageContainer.leadingAnchor, bottom: nil, right: nameageContainer.trailingAnchor,
@@ -38,6 +41,8 @@ class CustomCell:UITableViewCell {
         
         ageDisplay.doConstraints(top: nameDisplay.bottomAnchor, left: nameageContainer.leadingAnchor, bottom: nameageContainer.bottomAnchor, right: nameageContainer.trailingAnchor,
                                   padTop: 5, padLeft: 20, padBottom: 0, padRight: 0, width: 0, height: 0)
+        
+         txtInput.addTarget(self, action: #selector(updateTxtField), for: UIControl.Event.editingChanged)
 
         let myButton:UIButton = UIButton()
          myButton.addTarget(self, action: #selector(btnPressed), for: .touchUpInside)
@@ -46,8 +51,9 @@ class CustomCell:UITableViewCell {
         myButton.titleLabel?.textAlignment = .center
         myButton.layer.cornerRadius = 10
         contentView.addSubview(myButton)
-        myButton.doConstraints(top: contentView.topAnchor, left: nameageContainer.trailingAnchor, bottom: contentView.bottomAnchor, right: nil, padTop: 20, padLeft: 20, padBottom: -20, padRight: -20, width: 0, height: 0)
+        myButton.doConstraints(top: contentView.topAnchor, left: nameageContainer.trailingAnchor, bottom: nil, right: nil, padTop: 20, padLeft: 40, padBottom: -5, padRight: 0, width: 100, height: 0)
         
+        txtInput.doConstraints(top: myButton.bottomAnchor, left: nameageContainer.trailingAnchor, bottom: contentView.bottomAnchor, right: nil, padTop: 5, padLeft: 20, padBottom: -20, padRight: -20, width: 140, height: 0)
 
            //if UIDevice.current.orientation.isLandscape == true{
             if isLandscape == true{
@@ -60,9 +66,10 @@ class CustomCell:UITableViewCell {
             myLandscapeButton!.layer.borderWidth = 2
             myLandscapeButton!.layer.borderColor = UIColor.red.cgColor
             myLandscapeButton!.titleLabel?.textAlignment = .center
+            myLandscapeButton!.titleEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             myLandscapeButton!.layer.cornerRadius = 10
             contentView.addSubview(myLandscapeButton!)
-            myLandscapeButton!.doConstraints(top: contentView.topAnchor, left: myButton.trailingAnchor, bottom: contentView.bottomAnchor, right: nil, padTop: 20, padLeft: 20, padBottom: -20, padRight: -20, width: 0, height: 0)
+            myLandscapeButton!.doConstraints(top: contentView.topAnchor, left: txtInput.trailingAnchor, bottom: contentView.bottomAnchor, right: nil, padTop: 20, padLeft: 20, padBottom: -20, padRight: -20, width: 260, height: 0)
              
         }
         
@@ -122,6 +129,24 @@ class CustomCell:UITableViewCell {
         
         return ad
     }()
+    
+    var txtInput:UITextField = {
+        var txt = UITextField()
+       
+        txt.placeholder = " Enter here:"
+       
+        txt.textColor = .gray
+        txt.accessibilityValue = txt.text
+        txt.accessibilityLabel = txt.placeholder
+        txt.layer.borderColor = UIColor.gray.cgColor
+        txt.layer.borderWidth = 2
+        txt.isUserInteractionEnabled = true
+        return txt
+    }()
+    
+    @objc func updateTxtField(_ sender:UITextField){
+       print("text field changed")
+    }
     
     override func prepareForReuse() {
         //this happens before the viewcontroller sees current device orientation so it is opposite to common sense
