@@ -11,7 +11,15 @@ import UIKit
 class TableViewController: UITableViewController, shoutDelegate{
     
     func shout(_ name:String, _ row:Int){
-        print("hit \(name) at row: \(row) whose age is: \(tableData.people[row].age)")
+        //print("hit \(name) at row: \(row) whose age is: \(tableData.people[row].age)")
+        let alert = UIAlertController(title: "CustomCell btnPressed", message:"hit \(name) at row: \(row) whose age is: \(tableData.people[row].age)", preferredStyle: UIAlertController.Style.alert)
+        let noAction = UIAlertAction(title: "Do Something", style: .default, handler:
+        {(UIAlertAction) in
+            print("Alert was dismissed")
+        })
+        alert.addAction(noAction)
+        present(alert,animated: true, completion: nil)
+        //UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
     var isLandscape:Bool?
@@ -66,6 +74,15 @@ class TableViewController: UITableViewController, shoutDelegate{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("age at Selected Row is \(tableData.people[indexPath.row].age)")
         
+        let alerttwo = UIAlertController(title:"Selection Made", message: "Age at selected row is \(tableData.people[indexPath.row].age)",
+                                         preferredStyle:UIAlertController.Style.alert)
+        let noAction = UIAlertAction(title: "Do Something", style: .default, handler:
+        {(UIAlertAction) in
+            print("Alert was dismissed")
+        })
+        alerttwo.addAction(noAction)
+        present(alerttwo,animated: true, completion: nil)
+
     }
 //    func tableView(tableView: UITableView,cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 //
