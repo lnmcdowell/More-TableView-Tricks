@@ -15,6 +15,8 @@
 		67C000F022F856340087AE36 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C000EF22F856340087AE36 /* CustomCell.swift */; };
 		67C000F222F85B810087AE36 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C000F122F85B810087AE36 /* Extension.swift */; };
 		67C000F422F86AFE0087AE36 /* orientationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C000F322F86AFE0087AE36 /* orientationDelegate.swift */; };
+		67C000F622F8965E0087AE36 /* shoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C000F522F8965E0087AE36 /* shoutDelegate.swift */; };
+		67C000F822F89A290087AE36 /* MagicExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C000F722F89A290087AE36 /* MagicExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		67C000EF22F856340087AE36 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		67C000F122F85B810087AE36 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		67C000F322F86AFE0087AE36 /* orientationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orientationDelegate.swift; sourceTree = "<group>"; };
+		67C000F522F8965E0087AE36 /* shoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shoutDelegate.swift; sourceTree = "<group>"; };
+		67C000F722F89A290087AE36 /* MagicExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				67C000EF22F856340087AE36 /* CustomCell.swift */,
 				67C000F122F85B810087AE36 /* Extension.swift */,
 				67C000F322F86AFE0087AE36 /* orientationDelegate.swift */,
+				67C000F522F8965E0087AE36 /* shoutDelegate.swift */,
+				67C000F722F89A290087AE36 /* MagicExtensions.swift */,
 			);
 			path = "table_8-5-2019";
 			sourceTree = "<group>";
@@ -144,8 +150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				67C000F222F85B810087AE36 /* Extension.swift in Sources */,
+				67C000F822F89A290087AE36 /* MagicExtensions.swift in Sources */,
 				67C000F422F86AFE0087AE36 /* orientationDelegate.swift in Sources */,
 				67C000EE22F855550087AE36 /* viewData.swift in Sources */,
+				67C000F622F8965E0087AE36 /* shoutDelegate.swift in Sources */,
 				67C000DE22F8547C0087AE36 /* TableViewController.swift in Sources */,
 				67C000F022F856340087AE36 /* CustomCell.swift in Sources */,
 				67C000DC22F8547C0087AE36 /* AppDelegate.swift in Sources */,

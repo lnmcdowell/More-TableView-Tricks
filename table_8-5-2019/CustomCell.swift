@@ -9,6 +9,7 @@
 import UIKit
 
 class CustomCell:UITableViewCell {
+    var delegate:shoutDelegate?
     var isLandscape:Bool?
     var myLandscapeButton:UIButton?
     var cellPersonData:person? {
@@ -39,6 +40,7 @@ class CustomCell:UITableViewCell {
                                   padTop: 5, padLeft: 20, padBottom: 0, padRight: 0, width: 0, height: 0)
 
         let myButton:UIButton = UIButton()
+         myButton.addTarget(self, action: #selector(btnPressed), for: .touchUpInside)
         myButton.setTitle("Hello", for: .normal)
         myButton.backgroundColor = .orange
         myButton.titleLabel?.textAlignment = .center
@@ -51,6 +53,7 @@ class CustomCell:UITableViewCell {
             if isLandscape == true{
             //print("ran special button")
             myLandscapeButton = UIButton()
+                
             myLandscapeButton!.setTitle("Landscape Only Button", for: .normal)
             myLandscapeButton!.setTitleColor(.blue, for: .normal)
             myLandscapeButton!.backgroundColor = .white
@@ -65,6 +68,24 @@ class CustomCell:UITableViewCell {
         
     }
     
+    @objc func btnPressed(sender:UIButton){
+       // let fromCell:CustomCell = button.superview?.superclass as! CustomCell
+       // print(fromCell.cellPersonData?.name)
+        //sender is in Container View, which is in Cell's contentview, which is a CustomCell!!!
+        //let cell = sender.superview?.superview as! CustomCell
+        //above works, but is unnecessary because THIS IS THE CUSTOMCELL as self!!!
+       
+        delegate!.shout("\(cellPersonData!.name)", self.indexPath!.row)
+        
+        /* alternative her works too (without my Magic Extension)
+        let tbl = cell.superview as! UITableView
+        print("Cell row : \(tbl.indexPath(for: self)!.row)")
+      */
+        
+        print("Magic ext. easy row: \(self.indexPath!.row)")
+        //let indexPath = tbl.indexPath(for: cell)
+        //let myData = myDataArray[indexPath.row]
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

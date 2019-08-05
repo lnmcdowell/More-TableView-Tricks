@@ -8,8 +8,11 @@
 
 import UIKit
 
-class TableViewController: UITableViewController{
-
+class TableViewController: UITableViewController, shoutDelegate{
+    
+    func shout(_ name:String, _ row:Int){
+        print("hit \(name) at row: \(row) whose age is: \(tableData.people[row].age)")
+    }
 
     var isLandscape:Bool?
     let CELL_ID = "CELL_ID"
@@ -40,6 +43,8 @@ class TableViewController: UITableViewController{
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_ID, for: indexPath) as! CustomCell
+        
+        cell.delegate = self
         cell.cellPersonData = tableData.people[indexPath.row]
         cell.isLandscape = UIDevice.current.orientation.isLandscape
         cell.configureViews()
@@ -58,5 +63,14 @@ class TableViewController: UITableViewController{
         //print("reloading")
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("age at Selected Row is \(tableData.people[indexPath.row].age)")
+        
+    }
+//    func tableView(tableView: UITableView,cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//
+//
+//        return UITableViewCell()
+//    }
 }
 
