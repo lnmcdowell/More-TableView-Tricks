@@ -169,21 +169,24 @@ class CustomCell:UITableViewCell {
         let capitalLetterRegEx  = ".*[A-Z]+.*"  //whatever before and after at least one capitol letter
         let texttest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
         let capitalresult = texttest.evaluate(with: text)
-        //print("\(capitalresult)")
+        print("cap: \(capitalresult)")
         
         
-        let numberRegEx  = ".*[0-9].*[0-9]"//".*[0-9]{2,}.*" //two numbers in a row
+        let numberRegEx  = ".*[0-9].*[0-9]+.*"//".*[0-9]{2,}.*" //two numbers in a row
         let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: text)
-        //print("\(numberresult)")
+        print("num: \(numberresult)")
         
         
-        let specialCharacterRegX  = "[.*&^%$#@()/]+"
+        let specialCharacterRegX  = ".*[!&^%$#@()/]+.*"
         let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegX)
         
         let specialresult = texttest2.evaluate(with: text)
-        //print("\(specialresult)")
+        print("spec: \(specialresult)")
         
+        let simple = "^.*(?=.{6,})(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[!#$%&? “]).*$"
+        let simpleresult = NSPredicate(format:"SELF MATCHES %@",simple).evaluate(with: text)
+        print("simple: \(simpleresult)")
         return capitalresult && numberresult && specialresult
         
     }
