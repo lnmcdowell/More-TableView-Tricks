@@ -183,8 +183,8 @@ class CustomCell:UITableViewCell {
         
         let specialresult = texttest2.evaluate(with: text)
         print("spec: \(specialresult)")
-        
-        let simple = "^.*(?=.{6,})(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[!#$%&? “]).*$"
+        //pattern is at least 6 characters, featuring at least one capitol, one number, and a symbol
+        let simple = "^.*(?=.{6,})(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[!#$%&? “]+).*$"
         let simpleresult = NSPredicate(format:"SELF MATCHES %@",simple).evaluate(with: text)
         print("simple: \(simpleresult)")
         return capitalresult && numberresult && specialresult
